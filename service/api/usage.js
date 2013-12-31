@@ -1,11 +1,11 @@
 var formatter = require("../shared/usageMessageFormatter");
 
 exports.get = function(request, response) {
-    // response.send(statusCodes.OK, { message : 'Hello World!' });
+    // response.send({ message : 'Hello World!' });
     
-    console.dir(request.headers);
+    console.dir("Headers: %j", request.headers);
     
-    response.send({
+    response.send(statusCodes.OK, {
         message: formatter.format("ACTION", "EMAIL", "PASSWORD")
     });
 };
