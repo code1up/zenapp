@@ -7,6 +7,8 @@ exports.get = function(request, response) {
     
     var message = formatter.format("Authenticate", email, password);
     
+    console.log(message);
+    
     sender.send(message, function(error, data, body) {
         var statusCode = error ? statusCodes.OK : statusCodes.INTERNAL_SERVER_ERROR;
         
