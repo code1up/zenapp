@@ -6,7 +6,7 @@ var HEADERS = {
     "content-type": 'text/xml; charset="utf-8"'
 };
 
-function send(message, callback) {
+exports.send = function(message, callback) {
     request.post({
         url: URL,
         headers: HEADERS,
