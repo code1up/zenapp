@@ -22,17 +22,15 @@ exports.send = function(message, callback) {
                 data,
                 body
             );
-        }
-        else if (!data || !data.statusCode) {
+        } else if (!data || !data.statusCode) {
             callback(
                 {
-                    error: "No data or data status code received."
+                    error: "No data or status code received."
                 },
                 data,
                 body
             );
-        }
-        else if (data.statusCode !== 200) {
+        } else if (data.statusCode !== 200) {
             callback(
                 {
                     message: "Status code " + data.statusCode + " received."
@@ -40,8 +38,7 @@ exports.send = function(message, callback) {
                 null,
                 null
             );
-        }
-        else {
+        } else {
             var parser = new xml2js.Parser();
 
             console.log(data.body);
