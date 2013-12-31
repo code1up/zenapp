@@ -1,4 +1,4 @@
-var formatter = require("../shared/usageMessageformatter");
+var formatter = require("../shared/usagemessageformatter");
 var sender = require("../shared/usageMessagesender");
 
 exports.get = function(request, response) {
