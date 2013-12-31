@@ -51,7 +51,7 @@ var _formatBody = function(email, password, params) {
             password: password              
         });
 
-        _.forEach(extendedParams, function(value, key) {
+        _.each(extendedParams, function(value, key) {
             var pre = "<" + key + ">";
             var post = "</" + key + ">";
 
