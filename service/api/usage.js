@@ -6,6 +6,7 @@ exports.get = function(request, response) {
     console.dir("Headers: %j", request.headers);
     
     response.send(statusCodes.OK, {
-        message: formatter.format("ACTION", "EMAIL", "PASSWORD")
+        message: formatter.format("ACTION", "EMAIL", "PASSWORD"),
+        headers: request.headers
     });
 };
