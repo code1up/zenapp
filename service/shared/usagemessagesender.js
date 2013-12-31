@@ -1,3 +1,4 @@
+var request = require("request");
 var xml2js = require("xml2js");
 
 var URL = "https://webservices.zen.co.uk/broadband/v3.11/serviceengine.asmx";
