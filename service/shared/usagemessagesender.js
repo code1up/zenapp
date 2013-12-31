@@ -47,7 +47,7 @@ exports.send = function(message, callback) {
                 // console.log(json);
                 var body = json["soap:Body"];
 
-                callback(null, data, body);
+                callback(null, null, null);
             });
         }
     });
