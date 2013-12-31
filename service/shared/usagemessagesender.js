@@ -35,10 +35,10 @@ exports.send = function(message, callback) {
         else if (data.statusCode !== 200) {
             callback(
                 {
-                    error: "data code " + data.statusCode + " receieved."
+                    message: "Status code " + data.statusCode + " received."
                 },
-                data,
-                body
+                null,
+                null
             );
         }
         else {
