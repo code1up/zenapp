@@ -45,9 +45,9 @@ exports.send = function(message, callback) {
             
             parser.parseString(data.body, function(error, json) {
                 // console.log(json);
-                var body = json["soap:Body"];
+                var xxx = json["soap:Body"];
 
-                callback(null, null, null);
+                callback(null, xxx, null);
             });
         }
     });
