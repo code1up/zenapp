@@ -1,5 +1,5 @@
 var formatter = require("../shared/usagemessageformatter");
-var sender = require("../shared/usageMessagesender");
+var sender = require("../shared/usagemessagesender");
 
 exports.get = function(request, response) {
     var email = request.headers["x-zen-email"];

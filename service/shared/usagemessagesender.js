@@ -8,12 +8,34 @@ var HEADERS = {
     "content-type": 'text/xml; charset="utf-8"'
 };
 
-exports.send = function(message, callback) {
+/*
+var _handleResponse = function(error, data, body, callback) {
+    data = data || {};
+
+    var soapResponse = null;
+    var statusCode = data.statusCode || -1;
+
+    callback({
+        error: error,
+        statusCode: statusCode,
+        soapResponse: soapResponse
+    );
+};
+*/
+
+exports.send = function(soapRequest, callback) {
     request.post({
         url: URL,
         headers: HEADERS,
-        body: message
+        body: soapRequest
     }, function(error, data, body) {
+
+        console.log("response: %j: ", {
+            error: error,
+            data: data,
+            body: body
+        });
+
         if (error) {
             callback(
                 {
