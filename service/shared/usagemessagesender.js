@@ -28,12 +28,11 @@ exports.send = function(soapRequest, callback) {
         url: URL,
         headers: HEADERS,
         body: soapRequest
-    }, function(error, data, body) {
+    }, function(error, data) {
 
         console.log("response: %j: ", {
             error: error,
-            data: data,
-            body: body
+            data: data
         });
 
         if (error) {
@@ -42,24 +41,21 @@ exports.send = function(soapRequest, callback) {
                     error: "A network error occurred, please check your Internet connection.",
                     internalError: error
                 },
-                data,
-                body
+                data
             );
         } else if (!data || !data.statusCode) {
             callback(
                 {
                     error: "No data or status code received."
                 },
-                data,
-                body
+                data
             );
         } else if (data.statusCode !== 200) {
             callback(
                 {
                     message: "Status code " + data.statusCode + " received."
                 },
-                null,
-                null
+                data
             );
         } else {
             var options = {
