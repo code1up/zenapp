@@ -32,7 +32,7 @@ exports.send = function(soapRequest, callback) {
 
         console.log("response: %j: ", {
             error: error,
-            data: data
+            body: data.body
         });
 
         if (error) {
