@@ -40,7 +40,8 @@ exports.send = function(message, callback) {
             );
         } else {
             var options = {
-                explicitArray: false
+                explicitArray: false,
+                normalizeTags: true
             };
 
             var parser = new xml2js.Parser(options);
