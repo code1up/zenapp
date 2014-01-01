@@ -26,7 +26,25 @@ exports.get = function(request, response) {
                 return;
             };
 
-            var token = soapResponse.body.AuthenticateResponse.AuthenticateResult;
+            var token = null;
+
+            if (soapResponse &&
+                soapResponse.body &&
+                soapResponse.body.AuthenticateResponse &&
+                soapResponse.body.AuthenticateResponse.AuthenticateResult) {
+
+                token = soapResponse.body.AuthenticateResponse.AuthenticateResult;
+            }
+
+            if (!token) {
+                response.send(statusCodes.INTERNAL_SERVER_ERROR, {
+                    error: {
+                        message: "Missing authentication token.";
+                    }
+                });
+
+                return;
+            }
 
             response.send(statusCodes.OK, {
                 email: email,
