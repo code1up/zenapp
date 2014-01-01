@@ -28,11 +28,11 @@ exports.send = function(soapRequest, callback) {
         url: URL,
         headers: HEADERS,
         body: soapRequest
-    }, function(error, data) {
+    }, function(error, data, body) {
 
         console.log("response: %j: ", {
             error: error,
-            body: data.body
+            body: body
         });
 
         if (error) {
