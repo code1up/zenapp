@@ -1,21 +1,34 @@
 var formatter = require("../shared/usagemessageformatter");
 var sender = require("../shared/usagemessagesender");
+var parser = require("../shared/usagemessageparser");
 
 exports.get = function(request, response) {
     var email = request.headers["x-zen-email"];
     var password = request.headers["x-zen-password"];
     
-    var message = formatter.format("Authenticate", email, password);
+    var soapRequestString = formatter.format("Authenticate", email, password);
     
-    console.log(message);
-    
-    sender.send(message, function(error, data, body) {
-        var statusCode = error ? statusCodes.OK : statusCodes.INTERNAL_SERVER_ERROR;
+    sender.send(soapRequestString, function(error, soapResponseString) {
+        if (error) {
+            response.send(error.statusCode, {
+                error: error
+            });
+
+            return;
+        };
         
-        response.send(statusCode, {
-            error: error,
-            data: data,
-            body: body
-        });                
+        parser.parse(soapResponseString, function(error, soapResponse) {
+            if (error) {
+                response.send(statusCodes.INTERNAL_SERVER_ERROR, {
+                    error: error
+                });
+
+                return;
+            };
+
+            response.send(statusCodes.OK, {
+                soapResponse: soapResponse
+            });            
+        });
     });
 };
