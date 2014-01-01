@@ -33,8 +33,9 @@ exports.get = function(request, response) {
                 soapResponse.body.AuthenticateResponse &&
                 soapResponse.body.AuthenticateResponse.AuthenticateResult) {
 
-                token = soapResponse.body.AuthenticateResponse.AuthenticteResult;
             }
+
+                token = soapResponse.body.AuthenticateResponse.AuthenticateResul;
 
             if (!token) {
                 response.send(statusCodes.INTERNAL_SERVER_ERROR, {
