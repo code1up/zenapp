@@ -26,31 +26,22 @@ exports.get = function(request, response) {
                 return;
             };
 
-            var token = null;
+            try {
+                var token = soapResponse.body.AuthenticateResponse.AuthenticateResul;
 
-            if (soapResponse &&
-                soapResponse.body &&
-                soapResponse.body.AuthenticateResponse &&
-                soapResponse.body.AuthenticateResponse.AuthenticateResult) {
-
+                response.send(statusCodes.OK, {
+                    email: email,
+                    token: token
+                });            
             }
-
-                token = soapResponse.body.AuthenticateResponse.AuthenticateResul;
-
-            if (!token) {
+            catch (e) {
                 response.send(statusCodes.INTERNAL_SERVER_ERROR, {
                     error: {
-                        message: "Missing authentication token."
+                        message: "Missing authentication token.",
+                        internalError: e
                     }
                 });
-
-                return;
             }
-
-            response.send(statusCodes.OK, {
-                email: email,
-                token: token
-            });            
         });
     });
 };
