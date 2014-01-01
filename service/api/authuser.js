@@ -33,7 +33,7 @@ exports.get = function(request, response) {
                 soapResponse.body.AuthenticateResponse &&
                 soapResponse.body.AuthenticateResponse.AuthenticateResult) {
 
-                token = soapResponse.body.AuthenticateResponse.AuthenticateResult;
+                token = soapResponse.body.AuthenticateResponse.AuthenticteResult;
             }
 
             if (!token) {
