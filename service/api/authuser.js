@@ -27,7 +27,7 @@ exports.get = function(request, response) {
             };
 
             try {
-                var token = soapResponse.body.AuthenticateResponse.AuthenticateResul;
+                var token = soapResponse.body.AuthenticatResponse.AuthenticateResul;
 
                 response.send(statusCodes.OK, {
                     email: email,
