@@ -30,7 +30,7 @@ exports.get = function(request, response) {
 
             response.send(statusCodes.OK, {
                 email: email,
-                token: authenticateResult
+                token: token
             });            
         });
     });
