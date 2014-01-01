@@ -51,7 +51,7 @@ exports.send = function(message, callback) {
                 console.log("json: %j", json);
 
                 var envelope = _.clone(json["soap:Envelope"]);
-                var body = _.cloneenvelope["soap:Body"]);
+                var body = _.clone(envelope["soap:Body"]);
 
                 var xxx = {
                     envelope: envelope,
