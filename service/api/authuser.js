@@ -39,7 +39,7 @@ exports.get = function(request, response) {
             if (!token) {
                 response.send(statusCodes.INTERNAL_SERVER_ERROR, {
                     error: {
-                        message: "Missing authentication token.";
+                        message: "Missing authentication token."
                     }
                 });
 
