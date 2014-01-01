@@ -26,8 +26,11 @@ exports.get = function(request, response) {
                 return;
             };
 
+            var token = soapResponse.body.AuthenticateResponse.AuthenticateResult;
+
             response.send(statusCodes.OK, {
-                soapResponse: soapResponse
+                email: email,
+                token: authenticateResult
             });            
         });
     });
