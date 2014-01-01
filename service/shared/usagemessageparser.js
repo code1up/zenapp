@@ -47,7 +47,7 @@ var _handleParserResult = function(error, soapResponse, callback) {
     });
 };
 
-exports.parseSoapResponse = function(soapResponseString, callback) {
+exports.parse = function(soapResponseString, callback) {
     var options = {
         explicitArray: false
     };
