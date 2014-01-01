@@ -39,7 +39,11 @@ exports.send = function(message, callback) {
                 null
             );
         } else {
-            var parser = new xml2js.Parser();
+            var options = {
+                explicitArray: false
+            };
+
+            var parser = new xml2js.Parser(options);
 
             console.log(data.body);
             
