@@ -40,8 +40,7 @@ exports.send = function(message, callback) {
             );
         } else {
             var options = {
-                explicitArray: false,
-                normalizeTags: true
+                explicitArray: false
             };
 
             var parser = new xml2js.Parser(options);
@@ -51,7 +50,13 @@ exports.send = function(message, callback) {
             parser.parseString(data.body, function(error, json) {
                 console.log("json: %j", json);
 
-                var xxx = json["soap:Body"];
+                var envelope = _.clone(json["soap:Envelope"]);
+                var body = _.cloneenvelope["soap:Body"]);
+
+                var xxx = {
+                    envelope: envelope,
+                    body: body
+                };
 
                 console.log("xxx: %j", xxx);
 
