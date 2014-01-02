@@ -2,6 +2,19 @@ var formatter = require("../shared/usagemessageformatter");
 var sender = require("../shared/usagemessagesender");
 var parser = require("../shared/usagemessageparser");
 
+var _resolve = function(obj, keys) {
+    _.each(keys, function(key) {
+        if (obj && obj.hasOwnProperty(key)) {
+            obj = obj[key];
+            continue;
+        }
+
+        return undefined;
+    });
+
+    return obj;
+}
+
 exports.get = function(request, response) {
     var email = request.headers["x-zen-email"];
     var password = request.headers["x-zen-password"];
@@ -26,22 +39,26 @@ exports.get = function(request, response) {
                 return;
             };
 
-            try {
-                var token = soapResponse.body.AuthenticatResponse.AuthenticateResul;
+            token = _resolve(soapResponse, [
+                "body", "AuthenticatResponse", "AuthenticateResult"
+            ]);
 
-                response.send(statusCodes.OK, {
-                    email: email,
-                    token: token
-                });            
-            }
-            catch (e) {
+            if (!token) {
                 response.send(statusCodes.INTERNAL_SERVER_ERROR, {
                     error: {
-                        message: "Missing authentication token.",
-                        internalError: e
+                        message: "Missing authentication token."
                     }
                 });
+
+                return
             }
+
+            var token = soapResponse.body.AuthenticatResponse.AuthenticateResult;
+
+            response.send(statusCodes.OK, {
+                email: email,
+                token: token
+            });            
         });
     });
 };
