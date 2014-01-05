@@ -1,20 +1,7 @@
-var _ = require("underscore");
-
+var helper = require("../shared/usagehelper");
 var formatter = require("../shared/usagemessageformatter");
 var sender = require("../shared/usagemessagesender");
 var parser = require("../shared/usagemessageparser");
-
-var _resolve = function(obj, keys) {
-    _.each(keys, function(key) {
-        if (obj && obj.hasOwnProperty(key)) {
-            obj = obj[key];
-        } else {
-            return undefined;
-        }
-    });
-
-    return obj;
-};
 
 exports.get = function(request, response) {
     var email = request.headers["x-zen-email"];
@@ -40,13 +27,9 @@ exports.get = function(request, response) {
                 return;
             }
 
-            var token = _resolve(soapResponse, [
+            var token = usagehelper.resolve(soapResponse, [
                 "body", "AuthenticateResponse", "AuthenticateResult"
             ]);
-
-            console.log("token: %j", token);
-
-            token = soapResponse.body.AuthenticateResponse.AuthenticateResult;
 
             if (!token) {
                 response.send(statusCodes.INTERNAL_SERVER_ERROR, {
