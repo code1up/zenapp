@@ -1,50 +1,42 @@
-var helper = require("../shared/usagehelper");
-var formatter = require("../shared/usagemessageformatter");
-var sender = require("../shared/usagemessagesender");
-var parser = require("../shared/usagemessageparser");
+var usageHelper = require("../shared/usagehelper");
+var usageActions = require("../shared/usageactions");
+var credentialsParser = require("../shared/credentialsParser");
+
+var handler = function(error, soapResponse) {
+    if (error) {
+        var statusCode = error.statusCode || statusCodes.INTERNAL_SERVER_ERROR;
+
+        response.send(statusCode, error);
+        return;
+    }
+    
+    var token = usageHelper.resolve(soapResponse, [
+        "body", "AuthenticateResponse", "AuthenticateResult"
+    ]);
+
+    if (!token) {
+        response.send(statusCodes.INTERNAL_SERVER_ERROR, {
+            error: {
+                message: "Missing authentication token."
+            }
+        });
+
+        return;
+    }
+
+    response.send(statusCodes.OK, {
+        email: email,
+        token: token
+    });            
+};
 
 exports.get = function(request, response) {
-    var email = request.headers["x-zen-email"];
-    var password = request.headers["x-zen-password"];
-    
-    var soapRequestString = formatter.format("Authenticate", email, password);
-    
-    sender.send(soapRequestString, function(error, soapResponseString) {
+    credentialsParser.parse(request.headers, function(error, credentials) {
         if (error) {
-            response.send(error.statusCode, {
-                error: error
-            });
-
+            response.send(statusCodes.BAD_REQUEST, error);
             return;
         }
-        
-        parser.parse(soapResponseString, function(error, soapResponse) {
-            if (error) {
-                response.send(statusCodes.INTERNAL_SERVER_ERROR, {
-                    error: error
-                });
 
-                return;
-            }
-
-            var token = helper.resolve(soapResponse, [
-                "body", "AuthenticateResponse", "AuthenticateResult"
-            ]);
-
-            if (!token) {
-                response.send(statusCodes.INTERNAL_SERVER_ERROR, {
-                    error: {
-                        message: "Missing authentication token."
-                    }
-                });
-
-                return;
-            }
-
-            response.send(statusCodes.OK, {
-                email: email,
-                token: token
-            });            
-        });
+        usageMessage.send(usageActions.AUTHENTICATE, credentials, handler);
     });
 };

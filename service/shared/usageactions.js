@@ -1,0 +1,3 @@
+exports.actions = {
+    AUTHENTICATE: "Authenticate"
+};
