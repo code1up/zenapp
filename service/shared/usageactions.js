@@ -1,3 +1,1 @@
-exports.actions = {
-    AUTHENTICATE: "Authenticate"
-};
+exports.AUTHENTICATE = "Authenticate";
