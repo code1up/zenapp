@@ -38,6 +38,6 @@ exports.get = function(request, response) {
             return;
         }
 
-        usageMessage.send("Authenticate", credentials, handler);
+        usageMessage.send(usageActions.AUTHENTICATE, credentials, handler);
     });
 };
