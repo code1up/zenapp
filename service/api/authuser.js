@@ -43,6 +43,8 @@ exports.get = function(request, response) {
                 "body", "AuthenticatResponse", "AuthenticateResult"
             ]);
 
+            token = soapResponse.body.AuthenticatResponse.AuthenticateResult;
+
             if (!token) {
                 response.send(statusCodes.INTERNAL_SERVER_ERROR, {
                     error: {
