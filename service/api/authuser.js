@@ -41,12 +41,12 @@ exports.get = function(request, response) {
             }
 
             var token = _resolve(soapResponse, [
-                "body", "AuthenticatResponse", "AuthenticateResult"
+                "body", "AuthenticateResponse", "AuthenticateResult"
             ]);
 
-            console.log("token: %s", token);
+            console.log("token: %j", token);
 
-            token = soapResponse.body.AuthenticatResponse.AuthenticateResult;
+            token = soapResponse.body.AuthenticateResponse.AuthenticateResult;
 
             if (!token) {
                 response.send(statusCodes.INTERNAL_SERVER_ERROR, {
