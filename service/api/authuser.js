@@ -27,7 +27,7 @@ exports.get = function(request, response) {
                 return;
             }
 
-            var token = usagehelper.resolve(soapResponse, [
+            var token = helper.resolve(soapResponse, [
                 "body", "AuthenticateResponse", "AuthenticateResult"
             ]);
 
