@@ -4,7 +4,7 @@ var usageHelper = require("../shared/usagehelper");
 var usageMessage = require("../shared/usagemessage");
 
 exports.get = function(request, response) {
-    
+
     var handler = function(error, soapResponse) {
         if (error) {
             var statusCode = error.statusCode || statusCodes.INTERNAL_SERVER_ERROR;
@@ -28,7 +28,6 @@ exports.get = function(request, response) {
         }
 
         response.send(statusCodes.OK, {
-            email: email,
             token: token
         });            
     };
