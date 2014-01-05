@@ -1,17 +1,17 @@
 var EMAIL = "x-zen-email";
 var PASSWORD = "x-zen-password";
 
-exports.parse = function(headers, handler) {
+exports.parse = function(headers, callback) {
     var email = headers[EMAIL];
     var password = headers[PASSWORD];
 
     if (!(email && password)) {
-        handler({
+        callback({
             message: "Missing email or password."
         });
     }
 
-    handler(null, {
+    callback(null, {
         email: email,
         password: password
     });
