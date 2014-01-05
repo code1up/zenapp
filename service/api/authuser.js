@@ -1,6 +1,7 @@
-var usageHelper = require("../shared/usagehelper");
+var credentialsParser = require("../shared/credentialsparser");
 var usageActions = require("../shared/usageactions");
-var credentialsParser = require("../shared/credentialsParser");
+var usageHelper = require("../shared/usagehelper");
+var usageMessage = require("../shared/usagemessage");
 
 var handler = function(error, soapResponse) {
     if (error) {
