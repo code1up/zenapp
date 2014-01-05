@@ -2,7 +2,7 @@ var messageFormatter = require("../shared/usagemessageformatter");
 var messageParser = require("../shared/usagemessageparser");
 var messageSender = require("../shared/usagemessagesender");
 
-exports.send = function(credentials, action, handler) {
+exports.send = function(action, credentials, handler) {
     var soapRequestString = messageFormatter.format(
         action, credentials.email, credentials.password);    
 
