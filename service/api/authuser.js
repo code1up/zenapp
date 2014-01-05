@@ -4,15 +4,15 @@ var parser = require("../shared/usagemessageparser");
 
 var _resolve = function(obj, keys) {
     _.each(keys, function(key) {
-        if (!(obj && obj.hasOwnProperty(key)) {
+        if (obj && obj.hasOwnProperty(key)) {
+            obj = obj[key];
+        } else {
             return undefined;
         }
-
-        obj = obj[key];
     });
 
     return obj;
-}
+};
 
 exports.get = function(request, response) {
     var email = request.headers["x-zen-email"];
@@ -27,7 +27,7 @@ exports.get = function(request, response) {
             });
 
             return;
-        };
+        }
         
         parser.parse(soapResponseString, function(error, soapResponse) {
             if (error) {
@@ -36,11 +36,13 @@ exports.get = function(request, response) {
                 });
 
                 return;
-            };
+            }
 
-            token = _resolve(soapResponse, [
+            var token = _resolve(soapResponse, [
                 "body", "AuthenticatResponse", "AuthenticateResult"
             ]);
+
+            console.log("token: %s", token);
 
             token = soapResponse.body.AuthenticatResponse.AuthenticateResult;
 
@@ -51,10 +53,8 @@ exports.get = function(request, response) {
                     }
                 });
 
-                return
+                return;
             }
-
-            var token = soapResponse.body.AuthenticatResponse.AuthenticateResult;
 
             response.send(statusCodes.OK, {
                 email: email,
