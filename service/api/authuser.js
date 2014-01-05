@@ -1,3 +1,5 @@
+var _ = require("underscore");
+
 var formatter = require("../shared/usagemessageformatter");
 var sender = require("../shared/usagemessagesender");
 var parser = require("../shared/usagemessageparser");
