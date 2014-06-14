@@ -1,3 +1,5 @@
+var credentials = require("../shared/credentials");
+
 var headerNames = {
     EMAIL: "x-zen-email",
     PASSWORD: "x-zen-password",

@@ -1,4 +1,5 @@
 var credentialsParser = require("../shared/credentialsparser");
+var credentials = require("../shared/credentials");
 var usageActions = require("../shared/usageactions");
 var usageHelper = require("../shared/usagehelper");
 var usageMessage = require("../shared/usagemessage");
@@ -36,7 +37,7 @@ exports.get = function(request, response) {
         });            
     };
 
-    credentialsParser.parse(request.headers, null, function(error, credentials) {
+    credentialsParser.parse(request.headers, credentials.NONE, function(error, credentials) {
         if (error) {
             response.send(statusCodes.BAD_REQUEST, error);
             return;
