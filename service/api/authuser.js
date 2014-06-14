@@ -1,4 +1,5 @@
 var credentialsParser = require("../shared/credentialsparser");
+var credentials = require("../shared/credentials");
 var usageActions = require("../shared/usageactions");
 var usageHelper = require("../shared/usagehelper");
 var usageMessage = require("../shared/usagemessage");
