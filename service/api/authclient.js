@@ -37,14 +37,14 @@ exports.get = function(request, response) {
         });            
     };
 
-    credentialsParser.parse(request.headers, credentials.NONE, function(error, credentials) {
+    credentialsParser.parse(request.headers, credentials.USER, function(error, credentials) {
         if (error) {
             response.send(statusCodes.BAD_REQUEST, error);
             return;
         }
 
         var extra = {
-            AuthenticationGUID: "165008DE-34D1-4AD1-A077-CF4F576417D8",
+            AuthenticationGUID: "b2f79909-9d5a-47cc-826e-5046114cb349",
             ClientVersion: VERSION,
             ClientName: CLIENT_NAME,
             ClientIsBeta: IS_BETA
