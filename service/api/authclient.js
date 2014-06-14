@@ -36,7 +36,7 @@ exports.get = function(request, response) {
         });            
     };
 
-    credentialsParser.parse(request.headers, function(error, credentials) {
+    credentialsParser.parse(request.headers, null, function(error, credentials) {
         if (error) {
             response.send(statusCodes.BAD_REQUEST, error);
             return;
