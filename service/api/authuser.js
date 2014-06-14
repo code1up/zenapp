@@ -39,6 +39,6 @@ exports.get = function(request, response) {
             return;
         }
 
-        usageMessage.send(usageActions.AUTHENTICATE, credentials, handler);
+        usageMessage.send(usageActions.AUTHENTICATE, credentials, null, handler);
     });
 };

@@ -43,21 +43,21 @@ var _escapeXml = function(value) {
 var _formatBody = function(email, password, params) {
     var body = "";
 
-    if (_.isObject(params)) {
-        var extendedParams = _.copy(params);
+    params = params || {};
 
-        _.extend(extendedParams, {
-            email: email,
-            password: password              
-        });
+    var extendedParams = _.copy(params);
 
-        _.each(extendedParams, function(value, key) {
-            var pre = "<" + key + ">";
-            var post = "</" + key + ">";
+    _.extend(extendedParams, {
+        email: email,
+        password: password              
+    });
 
-            body += pre + _escapeXml(value) + post;
-        }); 
-    }
+    _.each(extendedParams, function(value, key) {
+        var pre = "<" + key + ">";
+        var post = "</" + key + ">";
+
+        body += pre + _escapeXml(value) + post;
+    });
 
     return body;
 };

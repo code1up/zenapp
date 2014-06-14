@@ -44,7 +44,7 @@ exports.get = function(request, response) {
         }
 
         var extra = {
-            AuthenticationGUID: "b2f79909-9d5a-47cc-826e-5046114cb349",
+            AuthenticationGUID: credentials.userAuthenticationToken,
             ClientVersion: VERSION,
             ClientName: CLIENT_NAME,
             ClientIsBeta: IS_BETA
