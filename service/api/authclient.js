@@ -44,7 +44,7 @@ exports.get = function(request, response) {
         }
 
         var extra = {
-            // AuthenticationGUID: usertoken,
+            AuthenticationGUID: "165008DE-34D1-4AD1-A077-CF4F576417D8",
             ClientVersion: VERSION,
             ClientName: CLIENT_NAME,
             ClientIsBeta: IS_BETA

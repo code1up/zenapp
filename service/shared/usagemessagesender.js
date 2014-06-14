@@ -14,7 +14,6 @@ var _logSoapResponse = function(error, body) {
 };
 
 var _handleSoapResponse = function(error, data, body, callback) {
-
     _logSoapResponse(error, body);
 
     if (error) {
