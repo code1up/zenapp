@@ -44,7 +44,7 @@ var _formatBody = function(email, password, params) {
     var body = "";
 
     if (_.isObject(params)) {
-        var extendedParams = _.copy(params);
+        var extendedParams = _.clone(params);
 
         _.extend(extendedParams, {
             email: email,
