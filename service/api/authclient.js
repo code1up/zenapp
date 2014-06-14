@@ -43,13 +43,13 @@ exports.get = function(request, response) {
             return;
         }
 
-        var extra = {
+        var params = {
             AuthenticationGUID: credentials.userAuthenticationToken,
             ClientVersion: VERSION,
             ClientName: CLIENT_NAME,
             ClientIsBeta: IS_BETA
         };
 
-        usageMessage.send(usageActions.VALIDATE_CLIENT, credentials, handler);
+        usageMessage.send(usageActions.VALIDATE_CLIENT, credentials, params, handler);
     });
 };
