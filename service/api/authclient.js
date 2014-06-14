@@ -44,10 +44,10 @@ exports.get = function(request, response) {
         }
 
         var extra = {
-                AuthenticationGUID: usertoken,
-                ClientVersion: version,
-                ClientName: clientName,
-                ClientIsBeta: isBeta
+            // AuthenticationGUID: usertoken,
+            ClientVersion: version,
+            ClientName: clientName,
+            ClientIsBeta: isBeta
         };
 
         usageMessage.send(usageActions.VALIDATE_CLIENT, credentials, handler);
