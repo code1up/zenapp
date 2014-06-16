@@ -62,7 +62,7 @@ var _formatBody = function(email, password, params) {
             if (_.isArray(value)) {
 
             } else {
-                body += _makeKeyValuePair(key, value);;
+                body += _makeKeyValuePair(key, value);
             }
         }); 
     }
