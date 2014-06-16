@@ -40,6 +40,15 @@ var _escapeXml = function(value) {
     return value;
 };
 
+var _makeKeyValuePair = function(key, value) {
+    var pre = "<" + key + ">";
+    var post = "</" + key + ">";
+
+    keyValuePair = pre + _escapeXml(value) + post;
+
+    return keyValuePair;
+}
+
 var _formatBody = function(email, password, params) {
     var body = "";
 
@@ -52,10 +61,16 @@ var _formatBody = function(email, password, params) {
         });
 
         _.each(extendedParams, function(value, key) {
-            var pre = "<" + key + ">";
-            var post = "</" + key + ">";
 
-            body += pre + _escapeXml(value) + post;
+            if (_.isArray(value) {
+
+            } else {
+
+            }
+
+            var keyValuePair = _makeKeyValuePair(key, value);
+
+            body += keyValuePair;
         }); 
     }
 
