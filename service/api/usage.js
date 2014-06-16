@@ -17,7 +17,10 @@ exports.get = function(request, response) {
         }
         
         var path = [
-            "body"
+            "body",
+            "broadbandAccounts",
+            "GetAndValidateAuthorisedBroadbandAccountsResponse",
+            "GetAndValidateAuthorisedBroadbandAccountsResult"
         ];
         
         var broadbandAccounts = usageHelper.resolve(soapResponse, path);
