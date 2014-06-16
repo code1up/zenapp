@@ -7,6 +7,23 @@ var usageHelper = require("../shared/usagehelper");
 var usageMessage = require("../shared/usagemessage");
 
 exports.get = function(request, response) {
+    var mapRawBroadbandAccounts = function(rawBroadbandAccounts) {
+        rawBroadbandAccounts = _.toArray(rawBroadbandAccounts);
+
+        var broadbandAccounts = [];
+        
+        _.each(rawBroadbandAccounts, function(rawBroadbandAccount) {
+            broadbandAccounts.push({
+                userName: rawBroadbandAccount.DSLUsername,
+                alias: rawBroadbandAccount.AliasName,
+                productName: rawBroadbandAccount.ProductName,
+                isUsageAvailable: rawBroadbandAccount.IsUsageInformationAvailable
+            }); 
+        });
+        
+        return broadbandAccounts;
+    };
+    
     var handler = function(error, soapResponse) {
         if (error) {
             var statusCode = error.statusCode || statusCodes.INTERNAL_SERVER_ERROR;
@@ -34,19 +51,8 @@ exports.get = function(request, response) {
             return;
         }
         
-        rawBroadbandAccounts = _.toArray(rawBroadbandAccounts);
-
-        var broadbandAccounts = [];
+        var broadbandAccounts = mapRawBroadbandAccounts(rawBroadbandAccounts);
         
-        _.each(rawBroadbandAccounts, function(rawBroadbandAccount) {
-            broadbandAccounts.push({
-                userName: rawBroadbandAccount.DSLUsername,
-                alias: rawBroadbandAccount.AliasName,
-                productName: rawBroadbandAccount.ProductName,
-                isUsageAvailable: rawBroadbandAccount.IsUsageInformationAvailable
-            }); 
-        });
-
         response.send(statusCodes.OK, {
             broadbandAccounts: broadbandAccounts
         });            
