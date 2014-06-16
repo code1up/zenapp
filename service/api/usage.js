@@ -52,8 +52,8 @@ exports.get = function(request, response) {
             adslAccounts: [
                 "zen198738@zen"
             ],
-            DateTimeFrom: "2014-06-14",
-            DateTimeTo: "2014-06-15",
+            dateTimeFrom: "2014-06-14T00:00:00.0",
+            dateTimeTo: "2014-06-15T00:00:00.0"
         };
 
         usageMessage.send(
