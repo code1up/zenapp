@@ -25,12 +25,12 @@ exports.get = function(request, response) {
             "ValidateClientResponse",
             "ValidateClientResult"];
         
-        var token = usageHelper.resolve(soapResponse, path);
+        var clientAuthenticationToken = usageHelper.resolve(soapResponse, path);
 
-        if (!token) {
+        if (!clientAuthenticationToken) {
             response.send(statusCodes.INTERNAL_SERVER_ERROR, {
                 error: {
-                    message: "Missing authentication token."
+                    message: "Missing client authentication token."
                 }
             });
 
@@ -38,7 +38,7 @@ exports.get = function(request, response) {
         }
 
         response.send(statusCodes.OK, {
-            token: token
+            clientAuthenticationToken: clientAuthenticationToken
         });            
     };
 
