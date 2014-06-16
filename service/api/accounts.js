@@ -12,7 +12,7 @@ exports.get = function(request, response) {
 
         var accounts = [];
         
-        _.each(mapRawAccounts, function(rawAccount) {
+        _.each(rawAccounts, function(rawAccount) {
             accounts.push({
                 userName: rawAccount.DSLUsername,
                 alias: rawAccount.AliasName,
