@@ -6,6 +6,12 @@ var HEADERS = {
     "content-type": 'text/xml; charset="utf-8"'
 };
 
+var _logSoapRequest = function(body) {
+    console.log("usagemessagesender::request: %j: ", {
+        body: body
+    });
+};
+
 var _logSoapResponse = function(error, body) {
     console.log("usagemessagesender::response: %j: ", {
         error: error,
@@ -64,6 +70,8 @@ exports.send = function(soapRequest, callback) {
         headers: HEADERS,
         body: soapRequest
     };
+
+    _logSoapRequest(soapRequest);
 
     request.post(httpRequest, function(error, data, body) {
         _handleSoapResponse(error, data, body, callback);
