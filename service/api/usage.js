@@ -21,7 +21,8 @@ exports.get = function(request, response) {
             "GetUsageResult",
             "Statistic",
             "AdditionalDetails",
-            "AllowanceDetails"
+            "AllowanceDetails",
+            "$"
         ];
         
         var xxx = usageHelper.resolve(soapResponse, ["body"]);
@@ -39,7 +40,12 @@ exports.get = function(request, response) {
         
         response.send(statusCodes.OK, {
             xxx: xxx,
-            allowance: allowance
+            allowance: {
+                monthly: allowance.MonthlyAllowance,
+                bank: allowance.BankAllowance,
+                regrade: allowance.RegradeAllowance,
+                usage: allowance.UsageAllowance,
+            }
         });            
     };
 
