@@ -5,7 +5,6 @@ var usageHelper = require("../shared/usagehelper");
 var usageMessage = require("../shared/usagemessage");
 
 exports.get = function(request, response) {
-
     var handler = function(error, soapResponse) {
         if (error) {
             var statusCode = error.statusCode || statusCodes.INTERNAL_SERVER_ERROR;
@@ -14,14 +13,18 @@ exports.get = function(request, response) {
             return;
         }
         
-        var token = usageHelper.resolve(soapResponse, [
-            "body", "AuthenticateResponse", "AuthenticateResult"
-        ]);
+        var path = [
+            "body",
+            "AuthenticateResponse",
+            "AuthenticateResult"
+        ];
+        
+        var userAuthenticationToken = usageHelper.resolve(soapResponse, path);
 
-        if (!token) {
+        if (!userAuthenticationToken) {
             response.send(statusCodes.INTERNAL_SERVER_ERROR, {
                 error: {
-                    message: "Missing authentication token."
+                    message: "Missing user authentication token."
                 }
             });
 
@@ -29,7 +32,7 @@ exports.get = function(request, response) {
         }
 
         response.send(statusCodes.OK, {
-            token: token
+            userAuthenticationToken: userAuthenticationToken
         });            
     };
 
