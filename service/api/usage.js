@@ -1,5 +1,5 @@
-var authuser = require("authuser");
-var authclient = require("authclient");
+var authuser = require("./authuser");
+var authclient = require("./authclient");
 
 exports.get = function(request, response) {
     response.send(statusCodes.OK);
