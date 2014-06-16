@@ -1,5 +1,4 @@
-var authuser = require("./authuser");
-var authclient = require("./authclient");
+var _ = require("underscore");
 
 var credentialsParser = require("../shared/credentialsparser");
 var credentials = require("../shared/credentials");
@@ -23,9 +22,9 @@ exports.get = function(request, response) {
             "GetAndValidateAuthorisedBroadbandAccountsResult"
         ];
         
-        var broadbandAccounts = usageHelper.resolve(soapResponse, path);
+        var rawBroadbandAccounts = usageHelper.resolve(soapResponse, path);
 
-        if (!broadbandAccounts) {
+        if (!rawBroadbandAccounts) {
             response.send(statusCodes.INTERNAL_SERVER_ERROR, {
                 error: {
                     message: "Missing broadband accounts."
@@ -34,6 +33,19 @@ exports.get = function(request, response) {
 
             return;
         }
+        
+        rawBroadbandAccounts = _.toArray(rawBroadbandAccounts);
+
+        var broadbandAccounts = [];
+        
+        _.each(rawBroadbandAccounts, function(rawBroadbandAccount) {
+            broadbandAccounts.push({
+                userName: rawBroadbandAccount.DSLUsername,
+                alias: rawBroadbandAccount.AliasName,
+                productName: rawBroadbandAccount.ProductName,
+                isUsageAvailable: rawBroadbandAccount.IsUsageInformationAvailable
+            }); 
+        });
 
         response.send(statusCodes.OK, {
             broadbandAccounts: broadbandAccounts
