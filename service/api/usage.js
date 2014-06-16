@@ -15,11 +15,17 @@ exports.get = function(request, response) {
             return;
         }
         
-        var path = [
-            "body"
+        var allowancePath = [
+            "body",
+            "GetUsageResponse",
+            "GetUsageResult",
+            "Statistic",
+            "AdditionalDetails",
+            "AllowanceDetails"
         ];
         
-        var xxx = usageHelper.resolve(soapResponse, path);
+        var xxx = usageHelper.resolve(soapResponse, ["body"]);
+        var allowance = usageHelper.resolve(soapResponse, allowancePath);
 
         if (!xxx) {
             response.send(statusCodes.INTERNAL_SERVER_ERROR, {
@@ -32,7 +38,8 @@ exports.get = function(request, response) {
         }
         
         response.send(statusCodes.OK, {
-            xxx: xxx
+            xxx: xxx,
+            allowance: allowance
         });            
     };
 
