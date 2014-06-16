@@ -44,9 +44,7 @@ var _makeKeyValuePair = function(key, value) {
     var pre = "<" + key + ">";
     var post = "</" + key + ">";
 
-    keyValuePair = pre + _escapeXml(value) + post;
-
-    return keyValuePair;
+    return pre + _escapeXml(value) + post;
 };
 
 var _formatBody = function(email, password, params) {
@@ -61,16 +59,11 @@ var _formatBody = function(email, password, params) {
         });
 
         _.each(extendedParams, function(value, key) {
-
             if (_.isArray(value)) {
 
             } else {
-
+                body += _makeKeyValuePair(key, value);;
             }
-
-            var keyValuePair = _makeKeyValuePair(key, value);
-
-            body += keyValuePair;
         }); 
     }
 
