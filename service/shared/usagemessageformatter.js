@@ -51,6 +51,8 @@ var _makeKeyValuePairs = function(key, values) {
     });
 
     keyValuePairs += POST;
+
+    return keyValuePairs;
 };
 
 var _makeKeyValuePair = function(key, value) {
