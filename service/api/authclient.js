@@ -29,7 +29,7 @@ exports.get = function(request, response) {
         if (!clientAuthenticationToken) {
             response.send(statusCodes.INTERNAL_SERVER_ERROR, {
                 error: {
-                    message: "Missing client authentication token."
+                    message: "Missing client validation token."
                 }
             });
 
@@ -37,7 +37,7 @@ exports.get = function(request, response) {
         }
 
         response.send(statusCodes.OK, {
-            clientAuthenticationToken: clientAuthenticationToken
+            clientValidationToken: clientAuthenticationToken
         });            
     };
 
