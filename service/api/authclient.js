@@ -18,9 +18,14 @@ exports.get = function(request, response) {
             return;
         }
         
-        var token = usageHelper.resolve(soapResponse, [
-            "body", "AuthenticateResponse", "AuthenticateResult", "ValidateClientResponse", "ValidateClientResult"
-        ]);
+        var path = [
+            "body",
+            "AuthenticateResponse",
+            "AuthenticateResult",
+            "ValidateClientResponse",
+            "ValidateClientResult"];
+        
+        var token = usageHelper.resolve(soapResponse, path);
 
         if (!token) {
             response.send(statusCodes.INTERNAL_SERVER_ERROR, {
