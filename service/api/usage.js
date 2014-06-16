@@ -62,7 +62,7 @@ exports.get = function(request, response) {
         credentials.USER_AUTHENTICATION_TOKEN |
         credentials.CLIENT_VALIDATION_TOKEN;
 
-    credentialsParser.parse(request.headers, prereqs, function(error, credentials) {
+    credentialsParser.parse(request.headers, prereqs, function (error, credentials) {
         if (error) {
             response.send(statusCodes.BAD_REQUEST, error);
             return;

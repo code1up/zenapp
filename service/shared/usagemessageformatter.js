@@ -47,7 +47,7 @@ var _makeKeyValuePair = function(key, value) {
     keyValuePair = pre + _escapeXml(value) + post;
 
     return keyValuePair;
-}
+};
 
 var _formatBody = function(email, password, params) {
     var body = "";
@@ -62,7 +62,7 @@ var _formatBody = function(email, password, params) {
 
         _.each(extendedParams, function(value, key) {
 
-            if (_.isArray(value) {
+            if (_.isArray(value)) {
 
             } else {
 
