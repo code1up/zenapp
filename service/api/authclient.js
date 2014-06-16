@@ -22,7 +22,8 @@ exports.get = function(request, response) {
             "AuthenticateResponse",
             "AuthenticateResult",
             "ValidateClientResponse",
-            "ValidateClientResult"];
+            "ValidateClientResult"
+        ];
         
         var clientAuthenticationToken = usageHelper.resolve(soapResponse, path);
 
@@ -41,7 +42,9 @@ exports.get = function(request, response) {
         });            
     };
 
-    credentialsParser.parse(request.headers, credentials.USER, function(error, credentials) {
+    var prereqs = credentials.USER_AUTHENTICATION_TOKEN;
+
+    credentialsParser.parse(request.headers, prereqs, function(error, credentials) {
         if (error) {
             response.send(statusCodes.BAD_REQUEST, error);
             return;
