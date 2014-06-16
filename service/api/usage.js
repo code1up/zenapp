@@ -51,7 +51,9 @@ exports.get = function(request, response) {
             ClientValidationGUID: credentials.clientValidationToken,
             adslAccounts: [
                 "zen198738@zen"
-            ]
+            ],
+            DateTimeFrom: "2014-06-14",
+            DateTimeTo: "2014-06-15",
         };
 
         usageMessage.send(
